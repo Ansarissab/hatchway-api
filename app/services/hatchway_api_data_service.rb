@@ -14,9 +14,9 @@ class HatchwayApiDataService < ApplicationService
   def ping
     result = RestClient.get(@base_url, headers = {})
   rescue RestClient::ExceptionWithResponse => e
-    { success: false, error: e }.to_json
+    { success: false, error: e }
   else
-    { success: true, payload: result.body }.to_json
+    { success: result.code, payload: JSON.parse(result.body) }
   end
 
   def base_url
