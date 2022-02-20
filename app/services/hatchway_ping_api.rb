@@ -12,7 +12,7 @@ class HatchwayPingApi < ApplicationService
   private
 
   def ping
-    result = RestClient.get(@base_url, headers = {})
+    result = RestClient.get @base_url
   rescue RestClient::ExceptionWithResponse => e
     { success: false, error: e }
   else
