@@ -2,7 +2,7 @@
 
 class Api::HomeController < ApplicationController
   def ping
-    response = HatchwayApiDataService.call
+    response = HatchwayPingApi.call
     render json: { success: response[:success] }
   end
 end

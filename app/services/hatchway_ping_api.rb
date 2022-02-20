@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HatchwayApiDataService < ApplicationService
+class HatchwayPingApi < ApplicationService
   def initialize
     base_url
   end
