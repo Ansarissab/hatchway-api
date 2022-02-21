@@ -13,7 +13,7 @@ class Api::HomeController < ApplicationController
   def posts
     tags = params[:tags].split(',')
     response = CustomHatchwayApi.call(tags)
-    render json: { success: response }
+    render json: response
   end
 
   private

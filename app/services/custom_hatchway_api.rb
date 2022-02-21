@@ -26,7 +26,7 @@ class CustomHatchwayApi < ApplicationService
       end
     end.each(&:join)
 
-    { success: 'true', payload: final_result }
+    final_result
   end
 
   def url(tag, sort_by = nil, direction = 'asc')
