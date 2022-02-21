@@ -16,13 +16,15 @@ class CustomHatchwayApi < ApplicationService
 
   def get_data
     final_result = { posts: '' }
-    @tags.each do |tag|
-      result = RestClient.get url(tag)
-    rescue RestClient::ExceptionWithResponse => e
-      { success: false, error: e }
-    else
-      final_result.merge!(JSON.parse(result.body)) { |_key, old_val, new_val| old_val + new_val }
-    end
+    @tags.map do |tag|
+      Thread.new do
+        result = RestClient.get url(tag)
+      rescue RestClient::ExceptionWithResponse => e
+        { success: false, error: e }
+      else
+        final_result.merge!(JSON.parse(result.body)) { |_key, old_val, new_val| old_val + new_val }
+      end
+    end.each(&:join)
 
     { success: 'true', payload: final_result }
   end
